@@ -1,0 +1,23 @@
+<mvc:View controllerName="com.pratheeksha.ui.html5app.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+    
+    <Page id="page" title="{i18n>title}">
+        <l:Grid id="formGrid" defaultSpan="L12 M12 S12" width="50%" class="sapUiMediumMargin" hSpacing="2" vSpacing="2">
+            
+            <!-- Name -->
+            <Label id="nameLabel" text="{i18n>myname}" labelFor="nameInput" />
+            <Input id="nameInput" placeholder="Enter your name" />
+
+            <!-- Age -->
+            <Label id="ageLabel" text="{i18n>age}" labelFor="ageInput" />
+            <Input id="ageInput" placeholder="Enter your age" type="Number" />
+
+            <!-- Save Button -->
+            <Button id="saveButton" text="{i18n>Save}" press="onSavePress" type="Emphasized" width="auto" class="sapUiTinyMarginTop" />
+
+        </l:Grid>
+    </Page>
+
+</mvc:View>

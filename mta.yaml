@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: MTA-task1
+version: 0.0.1
+modules:
+- name: MTA-task1-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: MTA-task1-destination-service
+    parameters:
+      content-target: true
+  - name: MTA-task1_html_repo_host
+    parameters:
+      service-key:
+        name: MTA-task1_html_repo_host-key
+  - name: uaa_MTA-task1
+    parameters:
+      service-key:
+        name: uaa_MTA-task1-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: BTPDemoApp_MTA_task1_html_repo_host
+          ServiceInstanceName: MTA-task1-html5-app-host-service
+          ServiceKeyName: MTA-task1_html_repo_host-key
+          sap.cloud.service: BTPDemoApp
+        - Authentication: OAuth2UserTokenExchange
+          Name: BTPDemoApp_uaa_MTA_task1
+          ServiceInstanceName: MTA-task1-xsuaa-service
+          ServiceKeyName: uaa_MTA-task1-key
+          sap.cloud.service: BTPDemoApp
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: MTA-task1-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: MTA-task1_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - compratheekshauihtml5app.zip
+      name: compratheekshauihtml5app
+      target-path: resources/
+- name: compratheekshauihtml5app
+  type: html5
+  path: html5app
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: MTA-task1-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: MTA-task1-destination-service
+    service-plan: lite
+- name: MTA-task1_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: MTA-task1-html5-app-host-service
+    service-plan: app-host
+- name: uaa_MTA-task1
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: MTA-task1-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
