@@ -52,7 +52,7 @@ sap.ui.define([
             var oCtx = oItem.getBindingContext("formModel");
             var iIndex = oCtx.getPath().split("/").pop(); // Get index
 
-            aDetails.splice(iIndex, 1); // Remove item
+            aDetails.splice(iIndex, 1); 
             oModel.setProperty("/details", aDetails);
 
             MessageToast.show("Item deleted.");
