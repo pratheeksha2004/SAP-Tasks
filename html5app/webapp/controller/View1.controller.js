@@ -5,7 +5,7 @@ sap.ui.define([
     "sap/ui/model/Filter",         // <<< Required for filtering
     "sap/ui/model/FilterOperator", // <<< Required for filter conditions
     "sap/ui/model/Sorter"          // <<< Required for sorting
-], function (Controller, JSONModel, MessageToast, Filter, FilterOperator, Sorter) { // <<< Added parameters
+], function (Controller, JSONModel, MessageToast, Filter, FilterOperator, Sorter) { // < Added parameters
     "use strict";
 
     return Controller.extend("com.pratheeksha.ui.html5app.controller.View1", {
@@ -101,7 +101,7 @@ sap.ui.define([
             // Build filter array
             var aFilters = [];
             if (sQuery) {
-                // Create filters for Name and Age (case-insensitive contains)
+                // Create filters for Name and Age case 
                 var oFilterName = new Filter("name", FilterOperator.Contains, sQuery);
                 // Since age is stored as number, we might need to compare differently
                 // Let's try filtering if the query string is part of the age converted to string
