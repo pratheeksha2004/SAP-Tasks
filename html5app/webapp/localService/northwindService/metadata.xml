@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="NorthwindModel" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Category">
+                <Key>
+                    <PropertyRef Name="CategoryID"/>
+                </Key>
+                <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="ID"/>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Category Name"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="Max" sap:label="Description"/>
+                <Property Name="Picture" Type="Edm.Binary" MaxLength="Max" sap:label="Picture"/>
+                <NavigationProperty Name="Products" Relationship="NorthwindModel.FK_Products_Categories" ToRole="Products" FromRole="Categories"/>
+            </EntityType>
+            <EntityType Name="CustomerDemographic">
+                <Key>
+                    <PropertyRef Name="CustomerTypeID"/>
+                </Key>
+                <Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:label="ID"/>
+                <Property Name="CustomerDesc" Type="Edm.String" MaxLength="Max" sap:label="Customer Desc"/>
+                <NavigationProperty Name="Customers" Relationship="NorthwindModel.CustomerCustomerDemo" ToRole="Customers" FromRole="CustomerDemographics"/>
+            </EntityType>
+            <EntityType Name="Customer">
+                <Key>
+                    <PropertyRef Name="CustomerID"/>
+                </Key>
+                <Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="5" sap:creatable="false" sap:updatable="false" sap:label="ID"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Company Name"/>
+                <Property Name="ContactName" Type="Edm.String" MaxLength="30" sap:label="Contact Name"/>
+                <Property Name="ContactTitle" Type="Edm.String" MaxLength="30" sap:label="Contact Title"/>
+                <Property Name="Address" Type="Edm.String" MaxLength="60" sap:label="Address"/>
+                <Property Name="City" Type="Edm.String" MaxLength="15" sap:label="City"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="15" sap:label="Region"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:label="Country"/>
+                <Property Name="Phone" Type="Edm.String" MaxLength="24" sap:label="Phone"/>
+                <Property Name="Fax" Type="Edm.String" MaxLength="24" sap:label="Fax"/>
+                <NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Customers" ToRole="Orders" FromRole="Customers"/>
+                <NavigationProperty Name="CustomerDemographics" Relationship="NorthwindModel.CustomerCustomerDemo" ToRole="CustomerDemographics" FromRole="Customers"/>
+            </EntityType>
+            <EntityType Name="Employee">
+                <Key>
+                    <PropertyRef Name="EmployeeID"/>
+                </Key>
+                <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="ID"/>
+                <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Last Name"/>
+                <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="First Name"/>
+                <Property Name="Title" Type="Edm.String" MaxLength="30" sap:label="Title"/>
+                <Property Name="TitleOfCourtesy" Type="Edm.String" MaxLength="25" sap:label="Title Of Courtesy"/>
+                <Property Name="BirthDate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Birth Date"/>
+                <Property Name="HireDate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Hire Date"/>
+                <Property Name="Address" Type="Edm.String" MaxLength="60" sap:label="Address"/>
+                <Property Name="City" Type="Edm.String" MaxLength="15" sap:label="City"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="15" sap:label="Region"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:label="Country"/>
+                <Property Name="HomePhone" Type="Edm.String" MaxLength="24" sap:label="Home Phone"/>
+                <Property Name="Extension" Type="Edm.String" MaxLength="4" sap:label="Extension"/>
+                <Property Name="Photo" Type="Edm.Binary" MaxLength="Max" sap:label="Photo"/>
+                <Property Name="Notes" Type="Edm.String" MaxLength="Max" sap:label="Notes"/>
+                <Property Name="ReportsTo" Type="Edm.Int32" sap:label="Reports To"/>
+                <Property Name="PhotoPath" Type="Edm.String" MaxLength="255" sap:label="Photo Path"/>
+                <NavigationProperty Name="Employees1" Relationship="NorthwindModel.FK_Employees_Employees" ToRole="Employees1" FromRole="Employees"/>
+                <NavigationProperty Name="Employee1" Relationship="NorthwindModel.FK_Employees_Employees" ToRole="Employees" FromRole="Employees1"/>
+                <NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Employees" ToRole="Orders" FromRole="Employees"/>
+                <NavigationProperty Name="Territories" Relationship="NorthwindModel.EmployeeTerritories" ToRole="Territories" FromRole="Employees"/>
+            </EntityType>
+            <EntityType Name="Order_Detail">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                    <PropertyRef Name="ProductID"/>
+                </Key>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:label="Order ID"/>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:label="Product ID"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4" sap:unit="UnitPrice" sap:label="Unit Price"/>
+                <Property Name="Quantity" Type="Edm.Int16" Nullable="false" sap:label="Quantity"/>
+                <Property Name="Discount" Type="Edm.Single" Nullable="false" sap:label="Discount"/>
+                <NavigationProperty Name="Order" Relationship="NorthwindModel.FK_Order_Details_Orders" ToRole="Orders" FromRole="Order_Details"/>
+                <NavigationProperty Name="Product" Relationship="NorthwindModel.FK_Order_Details_Products" ToRole="Products" FromRole="Order_Details"/>
+            </EntityType>
+            <EntityType Name="Order">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                </Key>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="Order ID"/>
+                <Property Name="CustomerID" Type="Edm.String" MaxLength="5" sap:label="Customer ID"/>
+                <Property Name="EmployeeID" Type="Edm.Int32" sap:label="Employee ID"/>
+                <Property Name="OrderDate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Order Date"/>
+                <Property Name="RequiredDate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Required Date"/>
+                <Property Name="ShippedDate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Shipped Date"/>
+                <Property Name="ShipVia" Type="Edm.Int32" sap:label="Ship Via"/>
+                <Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4" sap:unit="Freight" sap:label="Freight"/>
+                <Property Name="ShipName" Type="Edm.String" MaxLength="40" sap:label="Ship Name"/>
+                <Property Name="ShipAddress" Type="Edm.String" MaxLength="60" sap:label="Ship Address"/>
+                <Property Name="ShipCity" Type="Edm.String" MaxLength="15" sap:label="Ship City"/>
+                <Property Name="ShipRegion" Type="Edm.String" MaxLength="15" sap:label="Ship Region"/>
+                <Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10" sap:label="Ship Postal Code"/>
+                <Property Name="ShipCountry" Type="Edm.String" MaxLength="15" sap:label="Ship Country"/>
+                <NavigationProperty Name="Customer" Relationship="NorthwindModel.FK_Orders_Customers" ToRole="Customers" FromRole="Orders"/>
+                <NavigationProperty Name="Employee" Relationship="NorthwindModel.FK_Orders_Employees" ToRole="Employees" FromRole="Orders"/>
+                <NavigationProperty Name="Order_Details" Relationship="NorthwindModel.FK_Order_Details_Orders" ToRole="Order_Details" FromRole="Orders"/>
+                <NavigationProperty Name="Shipper" Relationship="NorthwindModel.FK_Orders_Shippers" ToRole="Shippers" FromRole="Orders"/>
+            </EntityType>
+            <EntityType Name="Product">
+                <Key>
+                    <PropertyRef Name="ProductID"/>
+                </Key>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="Product ID"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Product Name"/>
+                <Property Name="SupplierID" Type="Edm.Int32" sap:label="Supplier ID"/>
+                <Property Name="CategoryID" Type="Edm.Int32" sap:label="Category ID"/>
+                <Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20" sap:label="Quantity Per Unit"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unit="UnitPrice" sap:label="Unit Price"/>
+                <Property Name="UnitsInStock" Type="Edm.Int16" sap:label="Units In Stock"/>
+                <Property Name="UnitsOnOrder" Type="Edm.Int16" sap:label="Units On Order"/>
+                <Property Name="ReorderLevel" Type="Edm.Int16" sap:label="Reorder Level"/>
+                <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" sap:label="Discontinued"/>
+                <NavigationProperty Name="Category" Relationship="NorthwindModel.FK_Products_Categories" ToRole="Categories" FromRole="Products"/>
+                <NavigationProperty Name="Order_Details" Relationship="NorthwindModel.FK_Order_Details_Products" ToRole="Order_Details" FromRole="Products"/>
+                <NavigationProperty Name="Supplier" Relationship="NorthwindModel.FK_Products_Suppliers" ToRole="Suppliers" FromRole="Products"/>
+            </EntityType>
+            <EntityType Name="Region">
+                <Key>
+                    <PropertyRef Name="RegionID"/>
+                </Key>
+                <Property Name="RegionID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="Region ID"/>
+                <Property Name="RegionDescription" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Region Description"/>
+                <NavigationProperty Name="Territories" Relationship="NorthwindModel.FK_Territories_Region" ToRole="Territories" FromRole="Region"/>
+            </EntityType>
+            <EntityType Name="Shipper">
+                <Key>
+                    <PropertyRef Name="ShipperID"/>
+                </Key>
+                <Property Name="ShipperID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="Shipper ID"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Company Name"/>
+                <Property Name="Phone" Type="Edm.String" MaxLength="24" sap:label="Phone"/>
+                <NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Shippers" ToRole="Orders" FromRole="Shippers"/>
+            </EntityType>
+            <EntityType Name="Supplier">
+                <Key>
+                    <PropertyRef Name="SupplierID"/>
+                </Key>
+                <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:label="Supplier ID"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Company Name"/>
+                <Property Name="ContactName" Type="Edm.String" MaxLength="30" sap:label="Contact Name"/>
+                <Property Name="ContactTitle" Type="Edm.String" MaxLength="30" sap:label="Contact Title"/>
+                <Property Name="Address" Type="Edm.String" MaxLength="60" sap:label="Address"/>
+                <Property Name="City" Type="Edm.String" MaxLength="15" sap:label="City"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="15" sap:label="Region"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:label="Country"/>
+                <Property Name="Phone" Type="Edm.String" MaxLength="24" sap:label="Phone"/>
+                <Property Name="Fax" Type="Edm.String" MaxLength="24" sap:label="Fax"/>
+                <Property Name="HomePage" Type="Edm.String" MaxLength="Max" sap:label="Home Page"/>
+                <NavigationProperty Name="Products" Relationship="NorthwindModel.FK_Products_Suppliers" ToRole="Products" FromRole="Suppliers"/>
+            </EntityType>
+            <EntityType Name="Territory">
+                <Key>
+                    <PropertyRef Name="TerritoryID"/>
+                </Key>
+                <Property Name="TerritoryID" Type="Edm.String" Nullable="false" MaxLength="20" sap:creatable="false" sap:updatable="false" sap:label="Territory ID"/>
+                <Property Name="TerritoryDescription" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Territory Description"/>
+                <Property Name="RegionID" Type="Edm.Int32" Nullable="false" sap:label="Region ID"/>
+                <NavigationProperty Name="Region" Relationship="NorthwindModel.FK_Territories_Region" ToRole="Region" FromRole="Territories"/>
+                <NavigationProperty Name="Employees" Relationship="NorthwindModel.EmployeeTerritories" ToRole="Employees" FromRole="Territories"/>
+            </EntityType>
+            <EntityType Name="Alphabetical_list_of_product">
+                <Key>
+                    <PropertyRef Name="ProductID"/>
+                    <PropertyRef Name="ProductName"/>
+                    <PropertyRef Name="Discontinued"/>
+                    <PropertyRef Name="CategoryName"/>
+                </Key>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="SupplierID" Type="Edm.Int32"/>
+                <Property Name="CategoryID" Type="Edm.Int32"/>
+                <Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4"/>
+                <Property Name="UnitsInStock" Type="Edm.Int16"/>
+                <Property Name="UnitsOnOrder" Type="Edm.Int16"/>
+                <Property Name="ReorderLevel" Type="Edm.Int16"/>
+                <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15"/>
+            </EntityType>
+            <EntityType Name="Category_Sales_for_1997">
+                <Key>
+                    <PropertyRef Name="CategoryName"/>
+                </Key>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="CategorySales" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Current_Product_List">
+                <Key>
+                    <PropertyRef Name="ProductID"/>
+                    <PropertyRef Name="ProductName"/>
+                </Key>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="Customer_and_Suppliers_by_City">
+                <Key>
+                    <PropertyRef Name="CompanyName"/>
+                    <PropertyRef Name="Relationship"/>
+                </Key>
+                <Property Name="City" Type="Edm.String" MaxLength="15"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ContactName" Type="Edm.String" MaxLength="30"/>
+                <Property Name="Relationship" Type="Edm.String" Nullable="false" MaxLength="9"/>
+            </EntityType>
+            <EntityType Name="Invoice">
+                <Key>
+                    <PropertyRef Name="CustomerName"/>
+                    <PropertyRef Name="Salesperson"/>
+                    <PropertyRef Name="OrderID"/>
+                    <PropertyRef Name="ShipperName"/>
+                    <PropertyRef Name="ProductID"/>
+                    <PropertyRef Name="ProductName"/>
+                    <PropertyRef Name="UnitPrice"/>
+                    <PropertyRef Name="Quantity"/>
+                    <PropertyRef Name="Discount"/>
+                </Key>
+                <Property Name="ShipName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="ShipAddress" Type="Edm.String" MaxLength="60"/>
+                <Property Name="ShipCity" Type="Edm.String" MaxLength="15"/>
+                <Property Name="ShipRegion" Type="Edm.String" MaxLength="15"/>
+                <Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ShipCountry" Type="Edm.String" MaxLength="15"/>
+                <Property Name="CustomerID" Type="Edm.String" MaxLength="5"/>
+                <Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Address" Type="Edm.String" MaxLength="60"/>
+                <Property Name="City" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Salesperson" Type="Edm.String" Nullable="false" MaxLength="31"/>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="OrderDate" Type="Edm.DateTime"/>
+                <Property Name="RequiredDate" Type="Edm.DateTime"/>
+                <Property Name="ShippedDate" Type="Edm.DateTime"/>
+                <Property Name="ShipperName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4"/>
+                <Property Name="Quantity" Type="Edm.Int16" Nullable="false"/>
+                <Property Name="Discount" Type="Edm.Single" Nullable="false"/>
+                <Property Name="ExtendedPrice" Type="Edm.Decimal" Precision="19" Scale="4"/>
+                <Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Order_Details_Extended">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                    <PropertyRef Name="ProductID"/>
+                    <PropertyRef Name="ProductName"/>
+                    <PropertyRef Name="UnitPrice"/>
+                    <PropertyRef Name="Quantity"/>
+                    <PropertyRef Name="Discount"/>
+                </Key>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4"/>
+                <Property Name="Quantity" Type="Edm.Int16" Nullable="false"/>
+                <Property Name="Discount" Type="Edm.Single" Nullable="false"/>
+                <Property Name="ExtendedPrice" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Order_Subtotal">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                </Key>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Orders_Qry">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                    <PropertyRef Name="CompanyName"/>
+                </Key>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CustomerID" Type="Edm.String" MaxLength="5"/>
+                <Property Name="EmployeeID" Type="Edm.Int32"/>
+                <Property Name="OrderDate" Type="Edm.DateTime"/>
+                <Property Name="RequiredDate" Type="Edm.DateTime"/>
+                <Property Name="ShippedDate" Type="Edm.DateTime"/>
+                <Property Name="ShipVia" Type="Edm.Int32"/>
+                <Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4"/>
+                <Property Name="ShipName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="ShipAddress" Type="Edm.String" MaxLength="60"/>
+                <Property Name="ShipCity" Type="Edm.String" MaxLength="15"/>
+                <Property Name="ShipRegion" Type="Edm.String" MaxLength="15"/>
+                <Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ShipCountry" Type="Edm.String" MaxLength="15"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Address" Type="Edm.String" MaxLength="60"/>
+                <Property Name="City" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15"/>
+            </EntityType>
+            <EntityType Name="Product_Sales_for_1997">
+                <Key>
+                    <PropertyRef Name="CategoryName"/>
+                    <PropertyRef Name="ProductName"/>
+                </Key>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductSales" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Products_Above_Average_Price">
+                <Key>
+                    <PropertyRef Name="ProductName"/>
+                </Key>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Products_by_Category">
+                <Key>
+                    <PropertyRef Name="CategoryName"/>
+                    <PropertyRef Name="ProductName"/>
+                    <PropertyRef Name="Discontinued"/>
+                </Key>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="UnitsInStock" Type="Edm.Int16"/>
+                <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Sales_by_Category">
+                <Key>
+                    <PropertyRef Name="CategoryID"/>
+                    <PropertyRef Name="CategoryName"/>
+                    <PropertyRef Name="ProductName"/>
+                </Key>
+                <Property Name="CategoryID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductSales" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Sales_Totals_by_Amount">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                    <PropertyRef Name="CompanyName"/>
+                </Key>
+                <Property Name="SaleAmount" Type="Edm.Decimal" Precision="19" Scale="4"/>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ShippedDate" Type="Edm.DateTime"/>
+            </EntityType>
+            <EntityType Name="Summary_of_Sales_by_Quarter">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                </Key>
+                <Property Name="ShippedDate" Type="Edm.DateTime"/>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <EntityType Name="Summary_of_Sales_by_Year">
+                <Key>
+                    <PropertyRef Name="OrderID"/>
+                </Key>
+                <Property Name="ShippedDate" Type="Edm.DateTime"/>
+                <Property Name="OrderID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4"/>
+            </EntityType>
+            <Association Name="FK_Products_Categories">
+                <End Type="NorthwindModel.Category" Role="Categories" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Product" Role="Products" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Categories">
+                        <PropertyRef Name="CategoryID"/>
+                    </Principal>
+                    <Dependent Role="Products">
+                        <PropertyRef Name="CategoryID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CustomerCustomerDemo">
+                <End Type="NorthwindModel.CustomerDemographic" Role="CustomerDemographics" Multiplicity="*"/>
+                <End Type="NorthwindModel.Customer" Role="Customers" Multiplicity="*"/>
+            </Association>
+            <Association Name="FK_Orders_Customers">
+                <End Type="NorthwindModel.Customer" Role="Customers" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Order" Role="Orders" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Customers">
+                        <PropertyRef Name="CustomerID"/>
+                    </Principal>
+                    <Dependent Role="Orders">
+                        <PropertyRef Name="CustomerID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Employees_Employees">
+                <End Type="NorthwindModel.Employee" Role="Employees" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Employee" Role="Employees1" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Employees">
+                        <PropertyRef Name="EmployeeID"/>
+                    </Principal>
+                    <Dependent Role="Employees1">
+                        <PropertyRef Name="ReportsTo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Orders_Employees">
+                <End Type="NorthwindModel.Employee" Role="Employees" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Order" Role="Orders" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Employees">
+                        <PropertyRef Name="EmployeeID"/>
+                    </Principal>
+                    <Dependent Role="Orders">
+                        <PropertyRef Name="EmployeeID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="EmployeeTerritories">
+                <End Type="NorthwindModel.Territory" Role="Territories" Multiplicity="*"/>
+                <End Type="NorthwindModel.Employee" Role="Employees" Multiplicity="*"/>
+            </Association>
+            <Association Name="FK_Order_Details_Orders">
+                <End Type="NorthwindModel.Order" Role="Orders" Multiplicity="1"/>
+                <End Type="NorthwindModel.Order_Detail" Role="Order_Details" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Orders">
+                        <PropertyRef Name="OrderID"/>
+                    </Principal>
+                    <Dependent Role="Order_Details">
+                        <PropertyRef Name="OrderID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Order_Details_Products">
+                <End Type="NorthwindModel.Product" Role="Products" Multiplicity="1"/>
+                <End Type="NorthwindModel.Order_Detail" Role="Order_Details" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Products">
+                        <PropertyRef Name="ProductID"/>
+                    </Principal>
+                    <Dependent Role="Order_Details">
+                        <PropertyRef Name="ProductID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Orders_Shippers">
+                <End Type="NorthwindModel.Shipper" Role="Shippers" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Order" Role="Orders" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Shippers">
+                        <PropertyRef Name="ShipperID"/>
+                    </Principal>
+                    <Dependent Role="Orders">
+                        <PropertyRef Name="ShipVia"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Products_Suppliers">
+                <End Type="NorthwindModel.Supplier" Role="Suppliers" Multiplicity="0..1"/>
+                <End Type="NorthwindModel.Product" Role="Products" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Suppliers">
+                        <PropertyRef Name="SupplierID"/>
+                    </Principal>
+                    <Dependent Role="Products">
+                        <PropertyRef Name="SupplierID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="FK_Territories_Region">
+                <End Type="NorthwindModel.Region" Role="Region" Multiplicity="1"/>
+                <End Type="NorthwindModel.Territory" Role="Territories" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="Region">
+                        <PropertyRef Name="RegionID"/>
+                    </Principal>
+                    <Dependent Role="Territories">
+                        <PropertyRef Name="RegionID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+        </Schema>
+        <Schema Namespace="ODataWebV2.Northwind.Model" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="NorthwindEntities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Categories" EntityType="NorthwindModel.Category" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="CustomerDemographics" EntityType="NorthwindModel.CustomerDemographic" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Customers" EntityType="NorthwindModel.Customer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Employees" EntityType="NorthwindModel.Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Order_Details" EntityType="NorthwindModel.Order_Detail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Orders" EntityType="NorthwindModel.Order" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Products" EntityType="NorthwindModel.Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Regions" EntityType="NorthwindModel.Region" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Shippers" EntityType="NorthwindModel.Shipper" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Suppliers" EntityType="NorthwindModel.Supplier" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Territories" EntityType="NorthwindModel.Territory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Alphabetical_list_of_products" EntityType="NorthwindModel.Alphabetical_list_of_product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Category_Sales_for_1997" EntityType="NorthwindModel.Category_Sales_for_1997" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Current_Product_Lists" EntityType="NorthwindModel.Current_Product_List" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Customer_and_Suppliers_by_Cities" EntityType="NorthwindModel.Customer_and_Suppliers_by_City" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Invoices" EntityType="NorthwindModel.Invoice" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Order_Details_Extendeds" EntityType="NorthwindModel.Order_Details_Extended" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Order_Subtotals" EntityType="NorthwindModel.Order_Subtotal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Orders_Qries" EntityType="NorthwindModel.Orders_Qry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Product_Sales_for_1997" EntityType="NorthwindModel.Product_Sales_for_1997" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Products_Above_Average_Prices" EntityType="NorthwindModel.Products_Above_Average_Price" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Products_by_Categories" EntityType="NorthwindModel.Products_by_Category" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Sales_by_Categories" EntityType="NorthwindModel.Sales_by_Category" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Sales_Totals_by_Amounts" EntityType="NorthwindModel.Sales_Totals_by_Amount" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Summary_of_Sales_by_Quarters" EntityType="NorthwindModel.Summary_of_Sales_by_Quarter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Summary_of_Sales_by_Years" EntityType="NorthwindModel.Summary_of_Sales_by_Year" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Products_Suppliers" Association="NorthwindModel.FK_Products_Suppliers">
+                    <End Role="Suppliers" EntitySet="Suppliers"/>
+                    <End Role="Products" EntitySet="Products"/>
+                </AssociationSet>
+                <AssociationSet Name="Products_Categories" Association="NorthwindModel.FK_Products_Categories">
+                    <End Role="Categories" EntitySet="Categories"/>
+                    <End Role="Products" EntitySet="Products"/>
+                </AssociationSet>
+                <AssociationSet Name="Orders_Customers" Association="NorthwindModel.FK_Orders_Customers">
+                    <End Role="Customers" EntitySet="Customers"/>
+                    <End Role="Orders" EntitySet="Orders"/>
+                </AssociationSet>
+                <AssociationSet Name="Employees_Employees" Association="NorthwindModel.FK_Employees_Employees">
+                    <End Role="Employees" EntitySet="Employees"/>
+                    <End Role="Employees1" EntitySet="Employees"/>
+                </AssociationSet>
+                <AssociationSet Name="FK_Order_Details_Products_AssociationSet" Association="NorthwindModel.FK_Order_Details_Products">
+                    <End Role="Products" EntitySet="Products"/>
+                    <End Role="Order_Details" EntitySet="Order_Details"/>
+                </AssociationSet>
+                <AssociationSet Name="FK_Order_Details_Orders_AssociationSet" Association="NorthwindModel.FK_Order_Details_Orders">
+                    <End Role="Orders" EntitySet="Orders"/>
+                    <End Role="Order_Details" EntitySet="Order_Details"/>
+                </AssociationSet>
+                <AssociationSet Name="Orders_Shippers" Association="NorthwindModel.FK_Orders_Shippers">
+                    <End Role="Shippers" EntitySet="Shippers"/>
+                    <End Role="Orders" EntitySet="Orders"/>
+                </AssociationSet>
+                <AssociationSet Name="Territories_Region" Association="NorthwindModel.FK_Territories_Region">
+                    <End Role="Region" EntitySet="Regions"/>
+                    <End Role="Territories" EntitySet="Territories"/>
+                </AssociationSet>
+                <AssociationSet Name="Orders_Employees" Association="NorthwindModel.FK_Orders_Employees">
+                    <End Role="Employees" EntitySet="Employees"/>
+                    <End Role="Orders" EntitySet="Orders"/>
+                </AssociationSet>
+                <AssociationSet Name="CustomerCustomerDemo_AssociationSet" Association="NorthwindModel.CustomerCustomerDemo">
+                    <End Role="Customers" EntitySet="Customers"/>
+                    <End Role="CustomerDemographics" EntitySet="CustomerDemographics"/>
+                </AssociationSet>
+                <AssociationSet Name="EmployeeTerritories_AssociationSet" Association="NorthwindModel.EmployeeTerritories">
+                    <End Role="Employees" EntitySet="Employees"/>
+                    <End Role="Territories" EntitySet="Territories"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

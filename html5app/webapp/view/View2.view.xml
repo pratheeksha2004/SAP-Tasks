@@ -1,0 +1,66 @@
+<mvc:View
+    controllerName="com.pratheeksha.ui.html5app.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m">
+
+    <Page id="idView2Page" title="{i18n>view2Title}" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table
+                id="idProductsTable"
+                inset="false"
+                class="sapUiSmallMargin"
+                width="auto"
+                items="{
+                    path: 'northwindModel>/Products',
+                    sorter: {
+                        path: 'ProductName',
+                        descending: false
+                    }
+                }">
+
+                <headerToolbar>
+                    <Toolbar id="idView2Toolbar">
+                        <Title id="idView2TableTitle" text="{i18n>productsTitle}" level="H2"/>
+                        <ToolbarSpacer id="idView2Spacer"/>
+                        <!-- Optional: Add Search/Filter/Sort for this table later if needed -->
+                    </Toolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column id="idColProductId" width="6em">
+                        <Text id="idTxtColProductId" text="{i18n>productID}" />
+                    </Column>
+                    <Column id="idColProductName" minScreenWidth="Tablet" demandPopin="true">
+                         <Text id="idTxtColProductName" text="{i18n>productName}" />
+                    </Column>
+                    <Column id="idColUnitPrice" hAlign="End" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idTxtColUnitPrice" text="{i18n>unitPrice}" />
+                    </Column>
+                     <Column id="idColUnitsInStock" hAlign="End" minScreenWidth="Desktop" demandPopin="true">
+                        <Text id="idTxtColUnitsInStock" text="{i18n>unitsInStock}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="idProductsListItem" type="Inactive">
+                        <cells>
+                            <ObjectIdentifier id="idObjIdentifierProductId" title="{northwindModel>ProductID}"/>
+                            <Text id="idTxtProductName" text="{northwindModel>ProductName}" />
+                            <ObjectNumber
+                                id="idObjNumberUnitPrice"
+                                number="{
+                                    parts:[{path:'northwindModel>UnitPrice'}, {value: 'USD'}],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: {showMeasure: false}
+                                }"
+                                unit="USD"
+                                state="Information"/>
+                            <Text id="idTxtUnitsInStock" text="{northwindModel>UnitsInStock}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

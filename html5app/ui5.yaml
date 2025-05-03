@@ -9,12 +9,16 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
-        ui5:
-          path:
-            - /resources
+        ignoreCertError: false
+        ui5:                              # Indentation Level 1
+          path:                           # Indentation Level 2
+            - /resources                  # Indentation Level 3
             - /test-resources
           url: https://ui5.sap.com
+        backend:                          # Indentation Level 1 (Same as ui5:)
+          - path: /V2/Northwind/Northwind.svc # Indentation Level 2 (Dash indicates list item)
+            url: https://services.odata.org # Indentation Level 3 (Using direct URL)
+
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

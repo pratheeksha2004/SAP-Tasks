@@ -15,10 +15,19 @@
                 <Label id="idLabelAge" text="{i18n>age}" labelFor="idInputAge" required="true"/> <!-- Added required indicator -->
                 <Input id="idInputAge" placeholder="Enter your age" type="Number" width="100%"/> <!-- Adjusted width -->
 
-                <!-- Place Button appropriately if needed, maybe outside the grid or last row -->
-                 <Button id="idBtnSave" text="{i18n>Save}" icon="sap-icon://save" press=".onSavePress" type="Emphasized" /> <!-- Removed fixed width -->
+                <!-- Save Button -->
+                <Button id="idBtnSave" text="{i18n>Save}" icon="sap-icon://save" press=".onSavePress" type="Emphasized" /> <!-- Removed fixed width -->
 
-            </l:Grid>
+            </l:Grid> <!-- End of Form Grid -->
+
+            <!-- Navigation Button - ADDED HERE -->
+            <Button
+                id="idBtnNavToView2"
+                text="Show Products"
+                icon="sap-icon://list"
+                press=".onNavToView2Press"
+                type="Transparent"
+                class="sapUiSmallMarginBottom"/>
 
             <!-- Table Section -->
             <Table

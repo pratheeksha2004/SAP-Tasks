@@ -15,6 +15,17 @@
       "version": "1.17.3",
       "toolsId": "a4f0b09c-a00b-4706-8192-c6ec04ec9d3c"
     },
+    "dataSources": {
+      "northwindService": {  											      
+        "uri": "/V2/Northwind/Northwind.svc/",              
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/northwindService/metadata.xml" 
+          																      
+        }
+      }
+    },
     "crossNavigation": {
       "inbounds": {
         "btpuimodule-display": {
@@ -65,6 +76,19 @@
         "settings": {
           "bundleName": "com.pratheeksha.ui.html5app.i18n.i18n"
         }
+      },
+      "formModel": {  												         
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": true  													       
+      },
+      "northwindModel": {												       
+        "dataSource": "northwindService",      
+        "preload": true,												        
+        "settings": {
+            "defaultBindingMode": "TwoWay",			
+            "defaultCountMode": "Inline"				
+        }
       }
     },
     "resources": {
@@ -78,27 +102,41 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "controlAggregation": "pages",
-        "controlId": "app",
+        "controlId": "app",                     
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
         "path": "com.pratheeksha.ui.html5app.view",
         "async": true,
-        "viewPath": "com.pratheeksha.ui.html5app.view"
+        "viewPath": "com.pratheeksha.ui.html5app.view",
+        "clearControlAggregation": false        
       },
       "routes": [
         {
           "name": "RouteView1",
-          "pattern": ":?query:",
+          "pattern": "",                       
           "target": [
             "TargetView1"
+          ]
+        },
+        {                                      
+          "name": "RouteView2",                 
+          "pattern": "northwindproducts",       
+          "target": [
+            "TargetView2"                     
           ]
         }
       ],
       "targets": {
         "TargetView1": {
           "id": "View1",
-          "name": "View1"
+          "name": "View1",
+          "level": 1                            
+        },
+        "TargetView2": {                        
+          "id": "View2",
+          "name": "View2",                    
+          "level": 2                           
         }
       }
     },
