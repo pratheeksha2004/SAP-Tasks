@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="idAddEditDialog" title="{formModel>/dialogTitle}">
+        <content>
+            <f:SimpleForm
+                id="idDialogForm"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                columnsXL="1" columnsL="1" columnsM="1"
+                singleContainerFullSize="false">
+                <f:content>
+                    <Label id="idDialogLabelName" text="Name" required="true"/>
+                    <Input id="idDialogInputName" value="{dialogModel>/name}" required="true" liveChange=".onDialogInputChange"/>
+
+                    <Label id="idDialogLabelAge" text="Age" required="true"/>
+                  <Input id="idDialogInputAge" value="{dialogModel>/age}"  required="true" liveChange=".onDialogInputChange"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+           <beginButton>
+        <Button id="idDialogBtnSave"
+                text="{formModel>/dialogSaveButtonText}" 
+                type="Emphasized"
+                press=".onDialogSave"
+                enabled="{formModel>/isDialogSaveEnabled}"/>
+    </beginButton>
+        <endButton>
+            <Button id="idDialogBtnCancel" text="Cancel" press=".onDialogCancel"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

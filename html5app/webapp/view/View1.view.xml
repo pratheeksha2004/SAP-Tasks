@@ -1,35 +1,20 @@
 <mvc:View controllerName="com.pratheeksha.ui.html5app.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:l="sap.ui.layout">
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="com.pratheeksha.ui.html5app.model"> <!-- If formatter is in model folder and you want to alias it -->
 
     <Page id="idPage" title="{i18n>title}">
-        <VBox id="idVBoxContainer" class="sapUiSmallMargin"> <!-- Changed class for less margin -->
+        <VBox id="idVBoxContainer" class="sapUiSmallMargin">
 
-            <!-- Form Section -->
-            <l:Grid id="idFormGrid" defaultSpan="L12 M12 S12" width="auto" class="sapUiSmallMarginBottom" hSpacing="1" vSpacing="1"> <!-- Adjusted spacing/width -->
-
-                <Label id="idLabelName" text="{i18n>myname}" labelFor="idInputName" required="true"/> <!-- Added required indicator -->
-                <Input id="idInputName" placeholder="Enter your name" width="100%" /> <!-- Adjusted width -->
-
-                <Label id="idLabelAge" text="{i18n>age}" labelFor="idInputAge" required="true"/> <!-- Added required indicator -->
-                <Input id="idInputAge" placeholder="Enter your age" type="Number" width="100%"/> <!-- Adjusted width -->
-
-                <!-- Save Button -->
-                <Button id="idBtnSave" text="{i18n>Save}" icon="sap-icon://save" press=".onSavePress" type="Emphasized" /> <!-- Removed fixed width -->
-
-            </l:Grid> <!-- End of Form Grid -->
-
-            <!-- Navigation Button - ADDED HERE -->
             <Button
                 id="idBtnNavToView2"
-                text="Show Products"
-                icon="sap-icon://list"
+                text="Go to next page"
                 press=".onNavToView2Press"
                 type="Transparent"
                 class="sapUiSmallMarginBottom"/>
 
-            <!-- Table Section -->
             <Table
                 id="idTableData"
                 class="sapUiSmallMarginTop"
@@ -37,22 +22,27 @@
                 inset="false"
                 width="auto">
 
-                <!-- Table Header Toolbar with Search and Sort -->
                 <headerToolbar>
                     <Toolbar id="idHeaderToolbar">
                         <Title id="idTableTitle" text="Saved Details" level="H2"/>
-                        <ToolbarSpacer id="idToolbarSpacer"/> <!-- Pushes elements to the right -->
+                        <ToolbarSpacer id="idToolbarSpacer"/>
+                        <Button
+                            id="idBtnAdd"
+                            icon="sap-icon://add"
+                            tooltip="Add New Entry"
+                            press=".onOpenAddDialog"
+                            type="Transparent"/>
                         <SearchField
                             id="idSearchField"
                             width="auto"
-                            placeholder="Search by Name or Age..."
+                            placeholder="Search..."
                             search=".onSearch"
-                            liveChange=".onSearch"/> <!-- Trigger search on type or enter -->
+                            liveChange=".onSearch"/>
                         <Button
                             id="idSortButton"
                             icon="sap-icon://sort"
                             tooltip="Sort by Name"
-                            press=".onSort"/> <!-- Sort button -->
+                            press=".onSort"/>
                     </Toolbar>
                 </headerToolbar>
 
@@ -60,29 +50,47 @@
                     <Column id="idColName" width="auto">
                         <Text id="idTxtColName" text="Name" />
                     </Column>
-                    <Column id="idColAge" hAlign="End" width="5em"> <!-- Aligned age right -->
-                        <Text id="idTxtColAge" text="Age" />
+                    <Column id="idColAge" width="5em">
+                        <Text id="idTxtColAgeHeader" text="Age" />
                     </Column>
-                    <Column id="idColAction" hAlign="Center" width="5em"> <!-- Centered actions -->
+                    <Column id="idColAction" hAlign="Center" width="7em">
                         <Text id="idTxtColAction" text="Actions" />
                     </Column>
                 </columns>
 
                 <items>
-                    <ColumnListItem id="idColListItem" type="Active"> <!-- Row type -->
-                        <cells>
+                    <ColumnListItem id="idColListItem">
+                         <cells>
                             <Text id="idTxtName" text="{formModel>name}" />
-                            <Text id="idTxtAge" text="{formModel>age}" />
-                            <Button id="idBtnDelete"
-                                icon="sap-icon://delete"
-                                tooltip="Delete Row"
-                                press=".onDeletePress"
-                                type="Reject" />
+                            <Text id="idTxtAge" text="{formModel>age}">
+                                <customData>
+                                    <core:CustomData
+                                        id="idCustomDataAgeStatus"
+                                        key="ageStatusClass"
+                                        value="{
+                                            path: 'formModel>age',
+                                            formatter: '.formatter.ageStatusClass'
+                                        }"
+                                        writeToDom="true" />
+                                </customData>
+                            </Text>
+                            <HBox id="idActionButtonsBox" justifyContent="Center" width="100%">
+                                <Button id="idBtnEdit"
+                                    icon="sap-icon://edit"
+                                    tooltip="Edit Row"
+                                    press=".onOpenEditDialog"
+                                    type="Transparent"
+                                    class="sapUiTinyMarginEnd"/>
+                                <Button id="idBtnDelete"
+                                    icon="sap-icon://delete"
+                                    tooltip="Delete Row"
+                                    press=".onDeletePress"
+                                    type="Transparent" />
+                            </HBox>
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-
         </VBox>
     </Page>
 </mvc:View>

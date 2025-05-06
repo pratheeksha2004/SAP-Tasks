@@ -1,1 +1,26 @@
 /* Enter your custom styles here */
+
+/* Style for the Age Text based on custom data */
+/* Targets the element holding the custom data when its value is 'ageUnderage' */
+[data-agestatusclass="ageUnderage"] span.sapMText, /* Standard Text */
+[data-agestatusclass="ageUnderage"].sapMText /* Text might be the root element */
+ {
+    color: red !important; /* Use semantic color variables for themes if possible */
+    font-weight: bold;
+}
+
+/* Targets the element holding the custom data when its value is 'ageAdult' */
+[data-agestatusclass="ageAdult"] span.sapMText, /* Standard Text */
+[data-agestatusclass="ageAdult"].sapMText /* Text might be the root element */
+{
+    color: green !important; /* Use semantic color variables for themes if possible */
+}
+
+/* Optional: Style for the Busy Dialog */
+.customBusyDialog .sapMBusyDialog {
+    background-color: rgba(230, 230, 230, 0.8); /* Slightly transparent background */
+}
+
+.customBusyDialog .sapMBusyDialogIcon {
+    color: #007bff; /* Custom color for the spinner */
+}
