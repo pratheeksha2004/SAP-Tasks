@@ -17,7 +17,7 @@
 
                 <Button
                 id="idBtnNavToView3"
-                text="Go to pagination page"
+                text="Go to crud opertion page"
                 press=".onNavToView3Press"
                 type="Transparent"
                 class="sapUiSmallMarginBottom"/>

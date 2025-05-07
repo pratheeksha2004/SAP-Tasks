@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="idItemDialog" title="{viewModel>/dialogTitle}">
+        <content>
+            <f:SimpleForm
+                id="idItemDialogForm"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                columnsXL="1" columnsL="1" columnsM="1"
+                singleContainerFullSize="false">
+                <f:content>
+                    <!-- ID is usually generated or read-only, hide for Add? -->
+                    <Label id="idDialogLabelId" text="ID" required="false" visible="{= !!${dialogModel>/id} }"/>
+                    <Input id="idDialogInputId" value="{dialogModel>/id}" editable="false" visible="{= !!${dialogModel>/id} }"/>
+
+                    <Label id="idDialogLabelItemName" text="Item Name" required="true"/>
+                    <Input id="idDialogInputItemName" value="{dialogModel>/itemName}" required="true" liveChange=".onDialogInputChange"/>
+
+                    <Label id="idDialogLabelCategory" text="Category" required="true"/>
+                    <Input id="idDialogInputCategory" value="{dialogModel>/category}" required="true" liveChange=".onDialogInputChange"/>
+
+                    <Label id="idDialogLabelStock" text="Stock" required="true"/>
+                    <Input id="idDialogInputStock" value="{dialogModel>/stock}" type="Number" required="true" liveChange=".onDialogInputChange"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button id="idDialogBtnSaveUpdate" text="{viewModel>/dialogSaveButtonText}" type="Emphasized" press=".onDialogSaveItem" enabled="{viewModel>/isDialogSaveEnabled}"/>
+        </beginButton>
+        <endButton>
+            <Button id="idDialogBtnCancelItem" text="Cancel" press=".onDialogCancelItem"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

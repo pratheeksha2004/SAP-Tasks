@@ -1,12 +1,98 @@
 <mvc:View
-   controllerName="com.pratheeksha.ui.html5app.controller.View3"
-   xmlns:mvc="sap.ui.core.mvc"
-   displayBlock="true"
-   xmlns="sap.m"
- >
- <Page id="id3view" title="{i18n>view3Title}" showNavButton="true" navButtonPress=".onNavBack">
-   <content>
-      <Text id="idView3Text" text="This is View 3!" class="sapUiSmallMargin"/>
-   </content>
- </Page>
- </mvc:View>
+    controllerName="com.pratheeksha.ui.html5app.controller.View3"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m">
+
+    <Page id="idView3Page" title="{i18n>view3TitleCRUD}" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table
+                id="idItemsTable"
+                class="sapUiResponsiveMargin"
+                width="auto"
+                items="{viewModel>/pagedItems}">
+                <headerToolbar>
+                    <Toolbar id="idView3HeaderToolbar">
+                        <Title id="idView3TableTitle" text="Managed Items"/>
+                        <ToolbarSpacer id="idView3ToolbarSpacer"/>
+                        <Button
+                            id="idBtnAddItem"
+                            icon="sap-icon://add"
+                            tooltip="Add Item"
+                            press=".onOpenAddItemDialog"
+                            type="Transparent"/>
+                        <SearchField
+                            id="idItemSearchField"
+                            width="auto"
+                            placeholder="Search Name/Category..."
+                            search=".onSearchItems"
+                            liveChange=".onSearchItems"/>
+                        <Button
+                            id="idItemSortButton"
+                            icon="sap-icon://sort"
+                            tooltip="Sort by Item Name"
+                            press=".onSortItems"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="idItemsColId" width="4em">
+                        <Text id="idItemsTxtColId" text="ID"/>
+                    </Column>
+                    <Column id="idItemsColItemName" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idItemsTxtColItemName" text="Item Name"/>
+                    </Column>
+                    <Column id="idItemsColCategory" minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+                        <Text id="idItemsTxtColCategory" text="Category"/>
+                    </Column>
+                    <Column id="idItemsColStock" hAlign="End" width="5em">
+                        <Text id="idItemsTxtColStock" text="Stock"/>
+                    </Column>
+                    <Column id="idItemsColAction" hAlign="Center" width="7em">
+                        <Text id="idItemsTxtColAction" text="Actions"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="idItemsColListItem">
+                        <cells>
+                            <Text id="idItemsTxtCellId" text="{viewModel>id}"/>
+                            <Text id="idItemsTxtCellItemName" text="{viewModel>itemName}"/>
+                            <Text id="idItemsTxtCellCategory" text="{viewModel>category}"/>
+                            <ObjectNumber id="idItemsObjNumCellStock" number="{viewModel>stock}"/>
+                             <HBox id="idItemsActionButtonsBox" justifyContent="Center" width="100%">
+                                <Button id="idItemsBtnEdit"
+                                    icon="sap-icon://edit"
+                                    tooltip="Edit Item"
+                                    press=".onOpenEditItemDialog"
+                                    type="Transparent"
+                                    class="sapUiTinyMarginEnd"/>
+                                <Button id="idItemsBtnDelete"
+                                    icon="sap-icon://delete"
+                                    tooltip="Delete Item"
+                                    press=".onDeleteItem"
+                                    type="Transparent" />
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <OverflowToolbar id="idView3PaginationToolbar" class="sapUiSmallMarginTop">
+                <ToolbarSpacer id="idView3PagiSpacerLeft"/>
+                <Button
+                    id="idView3BtnPreviousPage"
+                    icon="sap-icon://navigation-left-arrow"
+                    tooltip="Previous Page"
+                    press=".onPreviousPage"
+                    enabled="{viewModel>/isPreviousEnabled}"/>
+                <Label id="idView3PageInfoLabel" text="Page {viewModel>/currentPage} of {viewModel>/totalPages}" class="sapUiTinyMarginBeginEnd"/>
+                <Button
+                    id="idView3BtnNextPage"
+                    icon="sap-icon://navigation-right-arrow"
+                    tooltip="Next Page"
+                    press=".onNextPage"
+                    enabled="{viewModel>/isNextEnabled}"/>
+                <ToolbarSpacer id="idView3PagiSpacerRight"/>
+            </OverflowToolbar>
+        </content>
+    </Page>
+</mvc:View>

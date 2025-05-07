@@ -1,0 +1,15 @@
+
+[
+    { "id": 1, "itemName": "Laptop Pro", "category": "Electronics", "stock": 15 },
+    { "id": 2, "itemName": "Office Chair", "category": "Furniture", "stock": 8 },
+    { "id": 3, "itemName": "Wireless Mouse", "category": "Accessories", "stock": 32 },
+    { "id": 4, "itemName": "Keyboard Mechanical", "category": "Accessories", "stock": 20 },
+    { "id": 5, "itemName": "Monitor 27 inch", "category": "Electronics", "stock": 10 },
+    { "id": 6, "itemName": "Desk Lamp", "category": "Furniture", "stock": 18 },
+    { "id": 7, "itemName": "USB Hub", "category": "Accessories", "stock": 50 },
+    { "id": 8, "itemName": "External SSD 1TB", "category": "Storage", "stock": 12 },
+    { "id": 9, "itemName": "Notebook A5", "category": "Stationery", "stock": 100 },
+    { "id": 10, "itemName": "Fountain Pen", "category": "Stationery", "stock": 40 },
+    { "id": 11, "itemName": "Smartphone X", "category": "Electronics", "stock": 25 },
+    { "id": 12, "itemName": "Bookshelf", "category": "Furniture", "stock": 5 }
+]
