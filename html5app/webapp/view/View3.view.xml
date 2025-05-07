@@ -1,0 +1,12 @@
+<mvc:View
+   controllerName="com.pratheeksha.ui.html5app.controller.View3"
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true"
+   xmlns="sap.m"
+ >
+ <Page id="id3view" title="{i18n>view3Title}" showNavButton="true" navButtonPress=".onNavBack">
+   <content>
+      <Text id="idView3Text" text="This is View 3!" class="sapUiSmallMargin"/>
+   </content>
+ </Page>
+ </mvc:View>

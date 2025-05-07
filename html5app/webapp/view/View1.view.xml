@@ -10,10 +10,18 @@
 
             <Button
                 id="idBtnNavToView2"
-                text="Go to next page"
+                text="Go to northwind page"
                 press=".onNavToView2Press"
                 type="Transparent"
                 class="sapUiSmallMarginBottom"/>
+
+                <Button
+                id="idBtnNavToView3"
+                text="Go to pagination page"
+                press=".onNavToView3Press"
+                type="Transparent"
+                class="sapUiSmallMarginBottom"/>
+
 
             <Table
                 id="idTableData"

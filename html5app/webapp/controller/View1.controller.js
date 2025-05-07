@@ -272,6 +272,9 @@ sap.ui.define([
         onNavToView2Press: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView2");
         },
+        onNavToView3Press: function () {
+            this.getOwnerComponent().getRouter().navTo("RouteView3");
+        },
 
         onExit: function() {
             this._getDialog().then(function(oDialog){
